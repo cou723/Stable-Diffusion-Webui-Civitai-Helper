@@ -1,5 +1,5 @@
 "use strict";
-function ch_sd_version() {
+function ch_sd_version(): string | null {
     let foot = gradioApp().getElementById("footer");
     if (!foot) {
         return null;
@@ -10,10 +10,13 @@ function ch_sd_version() {
         return null;
     }
 
-    let links = versions.getElementsByTagName("a");
-    if (links == null || links.length == 0) {
+    let [webui_version] = versions.getElementsByTagName("a");
+    if (!webui_version) {
         return null;
     }
 
-    return links[0].innerHTML.substring(1);
+    const version_text = webui_version.innerHTML.substring(1);
+    const webui_version_text = version_text.match(/v[0-9]\.[0-9]\.[0-9]/)[0];
+
+    return webui_version_text;
 }
