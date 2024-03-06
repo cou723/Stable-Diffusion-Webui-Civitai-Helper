@@ -1,5 +1,9 @@
 "use strict";
-function use_preview_prompt_with_path(event, model_type, model_path) {
+function use_preview_prompt_with_path(
+    event: any,
+    model_type: any,
+    model_path: any
+) {
     console.log("start use_preview_prompt");
 
     //get hidden components of extension
@@ -21,7 +25,7 @@ function use_preview_prompt_with_path(event, model_type, model_path) {
 
     // get active prompt
     let act_prompt = getActivePrompt();
-    msg["prompt"] = act_prompt.value;
+    msg["prompt"] = act_prompt!.value;
 
     // get active neg prompt
     let neg_prompt = <HTMLInputElement>getActiveNegativePrompt();

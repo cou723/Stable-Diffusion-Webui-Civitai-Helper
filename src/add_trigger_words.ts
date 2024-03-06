@@ -1,5 +1,5 @@
 "use strict";
-function add_trigger_words(event, model_type, search_term) {
+function add_trigger_words(event: any, model_type: any, search_term: any) {
     console.log("start add_trigger_words");
 
     //get hidden components of extension
@@ -21,7 +21,7 @@ function add_trigger_words(event, model_type, search_term) {
 
     // get active prompt
     let act_prompt = getActivePrompt();
-    msg["prompt"] = act_prompt.value;
+    msg["prompt"] = act_prompt!.value;
 
     // fill to msg box
     send_ch_py_msg(msg);

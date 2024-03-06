@@ -1,6 +1,11 @@
 "use strict";
 // download model's new version into SD at python side
-function ch_dl_model_new_version(event, model_path, version_id, download_url) {
+function ch_dl_model_new_version(
+    event: any,
+    model_path: any,
+    version_id: any,
+    download_url: any
+) {
     console.log("start ch_dl_model_new_version");
 
     // must confirm before downloading

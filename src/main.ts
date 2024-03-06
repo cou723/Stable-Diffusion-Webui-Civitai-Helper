@@ -82,7 +82,7 @@ globalThis.onUiLoaded(() => {
                     (el: any) =>
                         el.closest(".tabitem").style.display === "block"
                 ) as HTMLElement
-            )?.id.match(/^(txt2img|img2img)_(.+)_cards$/)[2];
+            )?.id.match(/^(txt2img|img2img)_(.+)_cards$/)![2];
 
             console.log("found active tab: " + active_extra_tab);
 
@@ -140,6 +140,13 @@ globalThis.onUiLoaded(() => {
                     .getElementById(extra_network_id);
 
                 // console.log("find extra_network_node: " + extra_network_id);
+
+                if (!extra_network_node) {
+                    console.log(
+                        "can not find extra_network_node: " + extra_network_id
+                    );
+                    continue;
+                }
 
                 // get all card nodes
                 cards = extra_network_node.querySelectorAll(".card");
@@ -383,9 +390,13 @@ globalThis.onUiLoaded(() => {
             extra_network_id =
                 tab_prefix + "_" + active_model_type + "_" + cardid_suffix;
             // console.log("searching extra_network_node: " + extra_network_id);
-            extra_network_node = globalThis
-                .gradioApp()
-                .getElementById(extra_network_id);
+            extra_network_node = gradioApp().getElementById(extra_network_id);
+            if (!extra_network_node) {
+                console.log(
+                    "can not find extra_network_node: " + extra_network_id
+                );
+                continue;
+            }
 
             // console.log("find extra_network_node: " + extra_network_id);
 
@@ -393,18 +404,17 @@ globalThis.onUiLoaded(() => {
             cards = extra_network_node.querySelectorAll(".card");
             console.log(`get cards: ${cards.length}`);
             for (let card of cards) {
-                console.log(`current card: ${card.dataset.name}`);
+                console.log(`current card: ${(card as any).dataset.name}`);
 
                 //get button row
-                button_row = card.querySelector(".button-row");
+                button_row = <HTMLElement>card.querySelector(".button-row");
+                if (!button_row) {
+                    console.log("can not find .button_row");
+                    continue;
+                }
 
                 //set button_row's flex-wrap to wrap
                 button_row.style.flexWrap = "wrap";
-
-                if (!button_row) {
-                    console.log("can not find button_row");
-                    continue;
-                }
 
                 let atags = button_row.querySelectorAll("a");
                 if (atags && atags.length) {
@@ -534,7 +544,7 @@ globalThis.onUiLoaded(() => {
     //from sd version 1.8.0, extra network's toolbar is fully rewrited. This extension need to re-write this part too.
     let sd_version = ch_sd_version();
     console.log(`sd version is: ${sd_version}`);
-    if (sd_version >= "1.8.0") {
+    if (sd_version && sd_version >= "1.8.0") {
         for (let prefix of tab_prefix_list) {
             toolbar_id = prefix + "_lora_controls";
 
@@ -608,7 +618,15 @@ globalThis.onUiLoaded(() => {
             ch_refresh.style.fontSize = "200%";
             ch_refresh.onclick = update_card_for_civitai;
 
-            extra_network_refresh_btn.parentNode.appendChild(ch_refresh);
+            const parrentNode = extra_network_refresh_btn.parentNode;
+            if (!parrentNode) {
+                console.error(
+                    "can not find parrentNode for extra_network_refresh_btn"
+                );
+                return;
+            }
+
+            parrentNode.appendChild(ch_refresh);
         }
 
         //run it once

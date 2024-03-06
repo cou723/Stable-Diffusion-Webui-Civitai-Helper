@@ -16,7 +16,7 @@ function ch_sd_version(): string | null {
     }
 
     const version_text = webui_version.innerHTML.substring(1);
-    const webui_version_text = version_text.match(/v[0-9]\.[0-9]\.[0-9]/)[0];
+    const webui_version_text = version_text.match(/v[0-9]\.[0-9]\.[0-9]/)![0];
 
     return webui_version_text;
 }

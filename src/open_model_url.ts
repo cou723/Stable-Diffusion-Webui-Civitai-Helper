@@ -1,7 +1,7 @@
 "use strict";
 //button's click function
 
-async function open_model_url(event, model_type, search_term) {
+async function open_model_url(event: any, model_type: any, search_term: any) {
     console.log("start open_model_url");
 
     //get hidden components of extension

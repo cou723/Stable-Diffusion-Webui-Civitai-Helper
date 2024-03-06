@@ -1,5 +1,5 @@
 "use strict";
-function convertModelTypeFromJsToPy(js_model_type) {
+function convertModelTypeFromJsToPy(js_model_type: any) {
     let model_type = "";
     switch (js_model_type) {
         case "textual_inversion":

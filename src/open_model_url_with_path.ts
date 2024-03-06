@@ -1,7 +1,11 @@
 "use strict";
 //button's click function with model_path
 
-async function open_model_url_with_path(event, model_type, model_path) {
+async function open_model_url_with_path(
+    event: any,
+    model_type: any,
+    model_path: any
+) {
     console.log("start open_model_url");
 
     //get hidden components of extension

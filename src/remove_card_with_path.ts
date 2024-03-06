@@ -1,6 +1,10 @@
 "use strict";
 
-async function remove_card_with_path(event, model_type, model_path) {
+async function remove_card_with_path(
+    event: any,
+    model_type: any,
+    model_path: any
+) {
     console.log("start remove_card");
 
     //get hidden components of extension

@@ -1,6 +1,6 @@
 "use strict";
 
-async function remove_card(event, model_type, search_term) {
+async function remove_card(event: any, model_type: any, search_term: any) {
     console.log("start remove_card");
 
     //get hidden components of extension
@@ -71,7 +71,7 @@ async function remove_card(event, model_type, search_term) {
             //check sd version
             let sd_version = ch_sd_version();
             console.log(`sd version is: ${sd_version}`);
-            if (sd_version >= "1.8.0") {
+            if (sd_version && sd_version >= "1.8.0") {
                 let js_model_type = convertModelTypeFromPyToJS(model_type);
                 if (!js_model_type) {
                     return;
