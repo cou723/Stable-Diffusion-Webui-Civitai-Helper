@@ -1,4 +1,4 @@
-"use strict";
+
 export function ch_sd_version(): string | null {
     let foot = gradioApp().getElementById("footer");
     if (!foot) {

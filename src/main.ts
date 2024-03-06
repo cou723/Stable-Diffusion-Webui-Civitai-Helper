@@ -1,5 +1,3 @@
-"use strict";
-
 import { ch_sd_version } from "./ch_sd_version";
 import { getActiveTabType } from "./getActiveTabType";
 

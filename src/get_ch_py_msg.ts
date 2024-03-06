@@ -1,4 +1,3 @@
-"use strict";
 // get msg from python side from a hidden textbox
 // normally this is an old msg, need to wait for a new msg
 export function get_ch_py_msg() {

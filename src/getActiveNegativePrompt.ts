@@ -1,4 +1,3 @@
-"use strict";
 export function getActiveNegativePrompt() {
     const currentTab = get_uiCurrentTabContent();
     switch (currentTab.id) {

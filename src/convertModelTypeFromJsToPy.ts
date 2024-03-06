@@ -1,4 +1,3 @@
-"use strict";
 export function convertModelTypeFromJsToPy(js_model_type: any) {
     let model_type = "";
     switch (js_model_type) {

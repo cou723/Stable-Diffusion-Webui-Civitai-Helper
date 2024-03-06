@@ -1,7 +1,6 @@
 /**
  * @type {import('webpack').Configuration}
  */
-const { DefinePlugin } = require("webpack");
 const path = require("path");
 
 module.exports = {
@@ -22,4 +21,6 @@ module.exports = {
         filename: "civitai_helper.js", // 出力ファイル名
         path: path.resolve(__dirname, "javascript"), // 出力先ディレクトリ
     },
+    mode: "development",
+    devtool: 'source-map',
 };

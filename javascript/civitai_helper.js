@@ -1,1 +1,573 @@
-(()=>{"use strict";var e={624:(e,t)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.ch_sd_version=void 0,t.ch_sd_version=function(){let e=gradioApp().getElementById("footer");if(!e)return null;let t=e.querySelector(".versions");if(!t)return null;let[o]=t.getElementsByTagName("a");return o?o.innerHTML.substring(1).match(/v[0-9]\.[0-9]\.[0-9]/)[0]:null}},807:(e,t)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.getActiveTabType=void 0,t.getActiveTabType=function(){switch(get_uiCurrentTabContent().id){case"tab_txt2img":return"txt2img";case"tab_img2img":return"img2img"}return null}}},t={};function o(n){var r=t[n];if(void 0!==r)return r.exports;var l=t[n]={exports:{}};return e[n](l,l.exports,o),l.exports}(()=>{const e=o(624),t=o(807);onUiLoaded((()=>{console.log("ui loaded");let o=["txt2img","img2img"],n=["textual_inversion","hypernetworks","checkpoints","lora"],r="cards";function l(){var e;let l=getTranslation("replace preview");l||(l="replace preview");let a="",i=null,c=null,s=null,d="",u="",g=null,p=!1,_=(0,t.getActiveTabType)();_||(_="txt2img");for(const t of o){if(t!=_)continue;let o="";gradioApp().getElementById(t+"_extra_tabs")||console.log("can not find extra_tabs: "+t+"_extra_tabs");const l=null===(e=Array.from(get_uiCurrentTabContent().querySelectorAll(".extra-network-cards,.extra-network-thumbs")).find((e=>"block"===e.closest(".tabitem").style.display)))||void 0===e?void 0:e.id.match(/^(txt2img|img2img)_(.+)_cards$/)[2];switch(console.log("found active tab: "+l),l){case"textual_inversion":o="ti";break;case"hypernetworks":o="hyper";break;case"checkpoints":o="ckp";break;case"lora":o="lora"}for(const e of n){switch(e){case"textual_inversion":u="ti";break;case"hypernetworks":u="hyper";break;case"checkpoints":u="ckp";break;case"lora":u="lora"}if(u){if(u==o)if(console.log("handle active extra tab"),a=t+"_"+e+"_"+r,i=gradioApp().getElementById(a),i){g=i.querySelectorAll(".card");for(let e of g){if(c=e.querySelector(".button-row"),!c){console.log("can not find button_row");continue}let t=c.querySelectorAll("a");if(t&&t.length?console.log("find atags: "+t.length):(console.log("no atags"),p=!0),!p){console.log("do not need to add buttons");continue}if(s=e.querySelector(".actions .additional .search_term"),!s){console.log("can not find search_term node for cards in "+a);continue}if(d=s.innerHTML.trim(),!d){console.log("search_term is empty for cards in "+a);continue}console.log("adding buttons");let o=document.createElement("a");o.href="#",o.innerHTML="🌐",o.className="card-button",o.title="Open this model's civitai url",o.setAttribute("onclick","open_model_url(event, '"+u+"', '"+d+"')");let n=document.createElement("a");n.href="#",n.innerHTML="💡",n.className="card-button",n.title="Add trigger words to prompt",n.setAttribute("onclick","add_trigger_words(event, '"+u+"', '"+d+"')");let r=document.createElement("a");r.href="#",r.innerHTML="🏷️",r.className="card-button",r.title="Use prompt from preview image",r.setAttribute("onclick","use_preview_prompt(event, '"+u+"', '"+d+"')");let l=document.createElement("a");l.href="#",l.innerHTML="❌",l.className="card-button",l.title="Remove this model",l.setAttribute("onclick","remove_card(event, '"+u+"', '"+d+"')"),c.appendChild(o),c.appendChild(n),c.appendChild(r),c.appendChild(l)}}else console.log("can not find extra_network_node: "+a)}else console.log("can not get model_type from: "+e)}}}function a(){console.log("start update_card_for_civitai_with_sd1_8");let e=getTranslation("replace preview");e||(e="replace preview");let l="",a=null,i=null,c=null,s="",d="",u=null,g=!1,p=null,_=null,f="",m="",h=(0,t.getActiveTabType)();h||(h="txt2img");for(const e of o)if(e==h){p=gradioApp().getElementById(e+"_extra_tabs"),p||console.log("can not find extra_tabs: "+e+"_extra_tabs");for(const t of n){let o=gradioApp().getElementById(e+"_"+t);if(null!=o){if("block"==o.style.display){_=o,f=t;break}}else console.log(`can not get extra_tab: ${e}_${t}`)}switch(console.log("found active_model_type: "+f),f){case"textual_inversion":m="ti",d="ti";break;case"hypernetworks":m="hyper",d="hyper";break;case"checkpoints":m="ckp",d="ckp";break;case"lora":m="lora",d="lora"}if(d)if(console.log("handle active extra tab"),l=e+"_"+f+"_"+r,a=gradioApp().getElementById(l),a){u=a.querySelectorAll(".card"),console.log(`get cards: ${u.length}`);for(let e of u){if(console.log(`current card: ${e.dataset.name}`),i=e.querySelector(".button-row"),!i){console.log("can not find .button_row");continue}i.style.flexWrap="wrap";let t=i.querySelectorAll("a");if(t&&t.length?console.log("find atags: "+t.length):g=!0,!g){console.log("no need to add buttons");continue}if(c=e.querySelector(".actions .additional .search_terms"),!c){console.log("can not find search_term node for cards in "+l);continue}if(s=c.innerHTML.trim(),!s){console.log("search_term is empty for cards in "+l);continue}s=s.replaceAll("\\","\\\\"),console.log("adding buttons");let o=document.createElement("a");o.href="#",o.innerHTML="🌐",o.className="card-button",o.title="Open this model's civitai url",o.setAttribute("onclick","open_model_url(event, '"+d+"', '"+s+"')");let n=document.createElement("a");n.href="#",n.innerHTML="💡",n.className="card-button",n.title="Add trigger words to prompt",n.setAttribute("onclick","add_trigger_words(event, '"+d+"', '"+s+"')");let r=document.createElement("a");r.href="#",r.innerHTML="🏷️",r.className="card-button",r.title="Use prompt from preview image",r.setAttribute("onclick","use_preview_prompt(event, '"+d+"', '"+s+"')");let a=document.createElement("a");a.href="#",a.innerHTML="❌",a.className="card-button",a.title="Remove this model",a.setAttribute("onclick","remove_card(event, '"+d+"', '"+s+"')"),i.appendChild(o),i.appendChild(n),i.appendChild(r),i.appendChild(a)}}else console.log("can not find extra_network_node: "+l);else console.log("can not get model_type with: "+f)}console.log("end update_card_for_civitai_with_sd1_8")}let i="",c="",s="",d=null,u=null,g=null,p=null,_=(0,e.ch_sd_version)();if(console.log(`sd version is: ${_}`),_&&_>="1.8.0")for(let e of o){c=e+"_lora_controls";for(const t of n)c=e+"_"+t+"_controls",g=gradioApp().getElementById(c),s=e+"_"+t+"_extra_refresh",d=gradioApp().getElementById(s),d?d.onclick=function(o){console.log("run refresh button on click"),extraNetworksControlRefreshOnClick(o,e,t),a()}:console.log("can not find refresh_btn with id: "+s)}else{for(let e of o){if(i=e+"_extra_tabs",u=gradioApp().getElementById(i),p=gradioApp().getElementById("txt2img_lora_extra_refresh"),console.log("get extra_network_refresh_btn: "+p),!p){console.log("can not get extra network refresh button for "+i);continue}let t=document.createElement("button");t.innerHTML="🔁",t.title="Refresh Civitai Helper's additional buttons",t.className="lg secondary gradio-button",t.style.fontSize="200%",t.onclick=l;const o=p.parentNode;if(!o)return void console.error("can not find parrentNode for extra_network_refresh_btn");o.appendChild(t)}l()}}))})()})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/ch_sd_version.ts":
+/*!******************************!*\
+  !*** ./src/ch_sd_version.ts ***!
+  \******************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ch_sd_version = void 0;
+function ch_sd_version() {
+    let foot = gradioApp().getElementById("footer");
+    if (!foot) {
+        return null;
+    }
+    let versions = foot.querySelector(".versions");
+    if (!versions) {
+        return null;
+    }
+    let [webui_version] = versions.getElementsByTagName("a");
+    if (!webui_version) {
+        return null;
+    }
+    const version_text = webui_version.innerHTML.substring(1);
+    const webui_version_text = version_text.match(/v[0-9]\.[0-9]\.[0-9]/)[0];
+    return webui_version_text;
+}
+exports.ch_sd_version = ch_sd_version;
+
+
+/***/ }),
+
+/***/ "./src/getActiveTabType.ts":
+/*!*********************************!*\
+  !*** ./src/getActiveTabType.ts ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getActiveTabType = void 0;
+function getActiveTabType() {
+    const currentTab = get_uiCurrentTabContent();
+    switch (currentTab.id) {
+        case "tab_txt2img":
+            return "txt2img";
+        case "tab_img2img":
+            return "img2img";
+    }
+    return null;
+}
+exports.getActiveTabType = getActiveTabType;
+
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+var exports = __webpack_exports__;
+/*!*********************!*\
+  !*** ./src/main.ts ***!
+  \*********************/
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const ch_sd_version_1 = __webpack_require__(/*! ./ch_sd_version */ "./src/ch_sd_version.ts");
+const getActiveTabType_1 = __webpack_require__(/*! ./getActiveTabType */ "./src/getActiveTabType.ts");
+onUiLoaded(() => {
+    console.log("ui loaded");
+    // get all extra network tabs
+    let tab_prefix_list = ["txt2img", "img2img"];
+    let model_type_list = [
+        "textual_inversion",
+        "hypernetworks",
+        "checkpoints",
+        "lora",
+    ];
+    let cardid_suffix = "cards";
+    // update extra network tab pages' cards
+    // * replace "replace preview" text button into an icon
+    // * add 3 button to each card:
+    //  - open model url 🌐
+    //  - add trigger words 💡
+    //  - use preview image's prompt 🏷️
+    // notice: javascript can not get response from python side
+    // so, these buttons just sent request to python
+    // then, python side gonna open url and update prompt text box, without telling js side.
+    function update_card_for_civitai() {
+        var _a;
+        //css
+        let btn_margin = "0px 5px";
+        let btn_fontSize = "200%";
+        let btn_thumb_fontSize = "100%";
+        let btn_thumb_display = "inline";
+        let btn_thumb_pos = "static";
+        let btn_thumb_backgroundImage = "none";
+        let btn_thumb_background = "rgba(0, 0, 0, 0.8)";
+        let ch_btn_txts = ["🌐", "💡", "🏷️"];
+        let replace_preview_text = getTranslation("replace preview");
+        if (!replace_preview_text) {
+            replace_preview_text = "replace preview";
+        }
+        //change all "replace preview" into an icon
+        let extra_network_id = "";
+        let extra_network_node = null;
+        let button_row = null;
+        let search_term_node = null;
+        let search_term = "";
+        let model_type = "";
+        let cards = null;
+        let need_to_add_buttons = false;
+        //get current tab
+        let active_tab_type = (0, getActiveTabType_1.getActiveTabType)();
+        if (!active_tab_type) {
+            active_tab_type = "txt2img";
+        }
+        for (const tab_prefix of tab_prefix_list) {
+            if (tab_prefix != active_tab_type) {
+                continue;
+            }
+            //find out current selected model type tab
+            let active_extra_tab_type = "";
+            let extra_tabs = gradioApp().getElementById(tab_prefix + "_extra_tabs");
+            if (!extra_tabs) {
+                console.log("can not find extra_tabs: " + tab_prefix + "_extra_tabs");
+            }
+            //get active extratab
+            const active_extra_tab = (_a = Array.from(get_uiCurrentTabContent().querySelectorAll(".extra-network-cards,.extra-network-thumbs")).find((el) => el.closest(".tabitem").style.display === "block")) === null || _a === void 0 ? void 0 : _a.id.match(/^(txt2img|img2img)_(.+)_cards$/)[2];
+            console.log("found active tab: " + active_extra_tab);
+            switch (active_extra_tab) {
+                case "textual_inversion":
+                    active_extra_tab_type = "ti";
+                    break;
+                case "hypernetworks":
+                    active_extra_tab_type = "hyper";
+                    break;
+                case "checkpoints":
+                    active_extra_tab_type = "ckp";
+                    break;
+                case "lora":
+                    active_extra_tab_type = "lora";
+                    break;
+            }
+            for (const js_model_type of model_type_list) {
+                //get model_type for python side
+                switch (js_model_type) {
+                    case "textual_inversion":
+                        model_type = "ti";
+                        break;
+                    case "hypernetworks":
+                        model_type = "hyper";
+                        break;
+                    case "checkpoints":
+                        model_type = "ckp";
+                        break;
+                    case "lora":
+                        model_type = "lora";
+                        break;
+                }
+                if (!model_type) {
+                    console.log("can not get model_type from: " + js_model_type);
+                    continue;
+                }
+                //only handle current sub-tab
+                if (model_type != active_extra_tab_type) {
+                    continue;
+                }
+                console.log("handle active extra tab");
+                extra_network_id =
+                    tab_prefix + "_" + js_model_type + "_" + cardid_suffix;
+                // console.log("searching extra_network_node: " + extra_network_id);
+                extra_network_node =
+                    gradioApp().getElementById(extra_network_id);
+                // console.log("find extra_network_node: " + extra_network_id);
+                if (!extra_network_node) {
+                    console.log("can not find extra_network_node: " + extra_network_id);
+                    continue;
+                }
+                // get all card nodes
+                cards = extra_network_node.querySelectorAll(".card");
+                for (let card of cards) {
+                    //get button row
+                    button_row = card.querySelector(".button-row");
+                    if (!button_row) {
+                        console.log("can not find button_row");
+                        continue;
+                    }
+                    let atags = button_row.querySelectorAll("a");
+                    if (atags && atags.length) {
+                        console.log("find atags: " + atags.length);
+                    }
+                    else {
+                        console.log("no atags");
+                        need_to_add_buttons = true;
+                    }
+                    if (!need_to_add_buttons) {
+                        console.log("do not need to add buttons");
+                        continue;
+                    }
+                    // search_term node
+                    // search_term = subfolder path + model name + ext
+                    search_term_node = card.querySelector(".actions .additional .search_term");
+                    if (!search_term_node) {
+                        console.log("can not find search_term node for cards in " +
+                            extra_network_id);
+                        continue;
+                    }
+                    // get search_term
+                    search_term = search_term_node.innerHTML.trim();
+                    if (!search_term) {
+                        console.log("search_term is empty for cards in " +
+                            extra_network_id);
+                        continue;
+                    }
+                    console.log("adding buttons");
+                    // then we need to add 3 buttons to each ul node:
+                    let open_url_node = document.createElement("a");
+                    open_url_node.href = "#";
+                    open_url_node.innerHTML = "🌐";
+                    open_url_node.className = "card-button";
+                    open_url_node.title = "Open this model's civitai url";
+                    open_url_node.setAttribute("onclick", "open_model_url(event, '" +
+                        model_type +
+                        "', '" +
+                        search_term +
+                        "')");
+                    let add_trigger_words_node = document.createElement("a");
+                    add_trigger_words_node.href = "#";
+                    add_trigger_words_node.innerHTML = "💡";
+                    add_trigger_words_node.className = "card-button";
+                    add_trigger_words_node.title =
+                        "Add trigger words to prompt";
+                    add_trigger_words_node.setAttribute("onclick", "add_trigger_words(event, '" +
+                        model_type +
+                        "', '" +
+                        search_term +
+                        "')");
+                    let use_preview_prompt_node = document.createElement("a");
+                    use_preview_prompt_node.href = "#";
+                    use_preview_prompt_node.innerHTML = "🏷️";
+                    use_preview_prompt_node.className = "card-button";
+                    use_preview_prompt_node.title =
+                        "Use prompt from preview image";
+                    use_preview_prompt_node.setAttribute("onclick", "use_preview_prompt(event, '" +
+                        model_type +
+                        "', '" +
+                        search_term +
+                        "')");
+                    let remove_card_node = document.createElement("a");
+                    remove_card_node.href = "#";
+                    remove_card_node.innerHTML = "❌";
+                    remove_card_node.className = "card-button";
+                    remove_card_node.title = "Remove this model";
+                    remove_card_node.setAttribute("onclick", "remove_card(event, '" +
+                        model_type +
+                        "', '" +
+                        search_term +
+                        "')");
+                    //add to card
+                    button_row.appendChild(open_url_node);
+                    button_row.appendChild(add_trigger_words_node);
+                    button_row.appendChild(use_preview_prompt_node);
+                    button_row.appendChild(remove_card_node);
+                }
+            }
+        }
+    }
+    // for sd version 1.8.0+
+    // update extra network tab pages' cards
+    // * replace "replace preview" text button into an icon
+    // * add 3 button to each card:
+    //  - open model url 🌐
+    //  - add trigger words 💡
+    //  - use preview image's prompt 🏷️
+    // notice: javascript can not get response from python side
+    // so, these buttons just sent request to python
+    // then, python side gonna open url and update prompt text box, without telling js side.
+    function update_card_for_civitai_with_sd1_8() {
+        console.log("start update_card_for_civitai_with_sd1_8");
+        //css
+        let btn_margin = "0px 5px";
+        let btn_fontSize = "200%";
+        let btn_thumb_fontSize = "100%";
+        let btn_thumb_display = "inline";
+        let btn_thumb_pos = "static";
+        let btn_thumb_backgroundImage = "none";
+        let btn_thumb_background = "rgba(0, 0, 0, 0.8)";
+        let ch_btn_txts = ["🌐", "💡", "🏷️"];
+        let replace_preview_text = getTranslation("replace preview");
+        if (!replace_preview_text) {
+            replace_preview_text = "replace preview";
+        }
+        //change all "replace preview" into an icon
+        let extra_network_id = "";
+        let extra_network_node = null;
+        let button_row = null;
+        let search_term_node = null;
+        let search_term = "";
+        let model_type = "";
+        let cards = null;
+        let need_to_add_buttons = false;
+        let extra_tabs = null;
+        let extra_tab = null;
+        let active_extra_tab = null;
+        let active_model_type = "";
+        let active_extra_tab_type = "";
+        let card_path = "";
+        //get current tab
+        let active_tab_type = (0, getActiveTabType_1.getActiveTabType)();
+        if (!active_tab_type) {
+            active_tab_type = "txt2img";
+        }
+        for (const tab_prefix of tab_prefix_list) {
+            if (tab_prefix != active_tab_type) {
+                continue;
+            }
+            //find out current selected model type tab
+            extra_tabs = gradioApp().getElementById(tab_prefix + "_extra_tabs");
+            if (!extra_tabs) {
+                console.log("can not find extra_tabs: " + tab_prefix + "_extra_tabs");
+            }
+            //get tab by id
+            for (const js_model_type of model_type_list) {
+                //get tab
+                let extra_tab = gradioApp().getElementById(tab_prefix + "_" + js_model_type);
+                if (extra_tab == null) {
+                    console.log(`can not get extra_tab: ${tab_prefix}_${js_model_type}`);
+                    continue;
+                }
+                //check if tab is active
+                if (extra_tab.style.display == "block") {
+                    active_extra_tab = extra_tab;
+                    active_model_type = js_model_type;
+                    break;
+                }
+            }
+            console.log("found active_model_type: " + active_model_type);
+            switch (active_model_type) {
+                case "textual_inversion":
+                    active_extra_tab_type = "ti";
+                    model_type = "ti";
+                    break;
+                case "hypernetworks":
+                    active_extra_tab_type = "hyper";
+                    model_type = "hyper";
+                    break;
+                case "checkpoints":
+                    active_extra_tab_type = "ckp";
+                    model_type = "ckp";
+                    break;
+                case "lora":
+                    active_extra_tab_type = "lora";
+                    model_type = "lora";
+                    break;
+            }
+            //get model_type for python side
+            if (!model_type) {
+                console.log("can not get model_type with: " + active_model_type);
+                continue;
+            }
+            console.log("handle active extra tab");
+            extra_network_id =
+                tab_prefix + "_" + active_model_type + "_" + cardid_suffix;
+            // console.log("searching extra_network_node: " + extra_network_id);
+            extra_network_node = gradioApp().getElementById(extra_network_id);
+            if (!extra_network_node) {
+                console.log("can not find extra_network_node: " + extra_network_id);
+                continue;
+            }
+            // console.log("find extra_network_node: " + extra_network_id);
+            // get all card nodes
+            cards = extra_network_node.querySelectorAll(".card");
+            console.log(`get cards: ${cards.length}`);
+            for (let card of cards) {
+                console.log(`current card: ${card.dataset.name}`);
+                //get button row
+                button_row = card.querySelector(".button-row");
+                if (!button_row) {
+                    console.log("can not find .button_row");
+                    continue;
+                }
+                //set button_row's flex-wrap to wrap
+                button_row.style.flexWrap = "wrap";
+                let atags = button_row.querySelectorAll("a");
+                if (atags && atags.length) {
+                    console.log("find atags: " + atags.length);
+                }
+                else {
+                    //console.log("no atags");
+                    need_to_add_buttons = true;
+                }
+                if (!need_to_add_buttons) {
+                    console.log("no need to add buttons");
+                    continue;
+                }
+                // search_term node
+                // search_term = subfolder path + model name + ext
+                search_term_node = card.querySelector(".actions .additional .search_terms");
+                if (!search_term_node) {
+                    console.log("can not find search_term node for cards in " +
+                        extra_network_id);
+                    continue;
+                }
+                // get search_term
+                search_term = search_term_node.innerHTML.trim();
+                if (!search_term) {
+                    console.log("search_term is empty for cards in " + extra_network_id);
+                    continue;
+                }
+                //from sd v1.8, need to replace all single '\' into '\\'
+                search_term = search_term.replaceAll("\\", "\\\\");
+                //`data-sort-path` convert all path to lowercase, which can not be used to find model on linux.
+                //so this is not used and fall back to use search_term
+                //console.log("card path: " + card.dataset.sortPath);
+                //card_path = card.dataset.sortPath.replaceAll("\\", "\\\\");
+                console.log("adding buttons");
+                // then we need to add 3 buttons to each ul node:
+                let open_url_node = document.createElement("a");
+                open_url_node.href = "#";
+                open_url_node.innerHTML = "🌐";
+                open_url_node.className = "card-button";
+                open_url_node.title = "Open this model's civitai url";
+                open_url_node.setAttribute("onclick", "open_model_url(event, '" +
+                    model_type +
+                    "', '" +
+                    search_term +
+                    "')");
+                let add_trigger_words_node = document.createElement("a");
+                add_trigger_words_node.href = "#";
+                add_trigger_words_node.innerHTML = "💡";
+                add_trigger_words_node.className = "card-button";
+                add_trigger_words_node.title = "Add trigger words to prompt";
+                add_trigger_words_node.setAttribute("onclick", "add_trigger_words(event, '" +
+                    model_type +
+                    "', '" +
+                    search_term +
+                    "')");
+                let use_preview_prompt_node = document.createElement("a");
+                use_preview_prompt_node.href = "#";
+                use_preview_prompt_node.innerHTML = "🏷️";
+                use_preview_prompt_node.className = "card-button";
+                use_preview_prompt_node.title = "Use prompt from preview image";
+                use_preview_prompt_node.setAttribute("onclick", "use_preview_prompt(event, '" +
+                    model_type +
+                    "', '" +
+                    search_term +
+                    "')");
+                let remove_card_node = document.createElement("a");
+                remove_card_node.href = "#";
+                remove_card_node.innerHTML = "❌";
+                remove_card_node.className = "card-button";
+                remove_card_node.title = "Remove this model";
+                remove_card_node.setAttribute("onclick", "remove_card(event, '" +
+                    model_type +
+                    "', '" +
+                    search_term +
+                    "')");
+                //add to card
+                button_row.appendChild(open_url_node);
+                button_row.appendChild(add_trigger_words_node);
+                button_row.appendChild(use_preview_prompt_node);
+                button_row.appendChild(remove_card_node);
+            }
+        }
+        console.log("end update_card_for_civitai_with_sd1_8");
+    }
+    let tab_id = "";
+    let toolbar_id = "";
+    let refresh_btn_id = "";
+    let refresh_btn = null;
+    let extra_tab = null;
+    let extra_toolbar = null;
+    let extra_network_refresh_btn = null;
+    //add refresh button to extra network's toolbar
+    //from sd version 1.8.0, extra network's toolbar is fully rewrited. This extension need to re-write this part too.
+    let sd_version = (0, ch_sd_version_1.ch_sd_version)();
+    console.log(`sd version is: ${sd_version}`);
+    if (sd_version && sd_version >= "1.8.0") {
+        for (let prefix of tab_prefix_list) {
+            toolbar_id = prefix + "_lora_controls";
+            //with sd 1.8.0, each model type has its own extra toolbar.
+            //so here we need to get all toolbars
+            for (const js_model_type of model_type_list) {
+                //get toolbar
+                toolbar_id = prefix + "_" + js_model_type + "_controls";
+                //get toolbar
+                extra_toolbar = gradioApp().getElementById(toolbar_id);
+                //get official refresh button
+                refresh_btn_id =
+                    prefix + "_" + js_model_type + "_extra_refresh";
+                refresh_btn = gradioApp().getElementById(refresh_btn_id);
+                if (!refresh_btn) {
+                    console.log("can not find refresh_btn with id: " + refresh_btn_id);
+                    continue;
+                }
+                // from sd v1.8.0, we add refresh function to official's refresh button
+                refresh_btn.onclick = function (event) {
+                    console.log("run refresh button on click");
+                    //official's refresh function
+                    extraNetworksControlRefreshOnClick(event, prefix, js_model_type);
+                    update_card_for_civitai_with_sd1_8();
+                };
+            }
+        }
+        //run it once
+        //update_card_for_civitai_with_sd1_8();
+    }
+    else {
+        for (let prefix of tab_prefix_list) {
+            tab_id = prefix + "_extra_tabs";
+            extra_tab = gradioApp().getElementById(tab_id);
+            //get toolbar
+            //get Refresh button
+            extra_network_refresh_btn = gradioApp().getElementById("txt2img_lora_extra_refresh");
+            console.log("get extra_network_refresh_btn: " + extra_network_refresh_btn);
+            if (!extra_network_refresh_btn) {
+                console.log("can not get extra network refresh button for " + tab_id);
+                continue;
+            }
+            // add refresh button to toolbar
+            let ch_refresh = document.createElement("button");
+            ch_refresh.innerHTML = "🔁";
+            ch_refresh.title = "Refresh Civitai Helper's additional buttons";
+            ch_refresh.className = "lg secondary gradio-button";
+            ch_refresh.style.fontSize = "200%";
+            ch_refresh.onclick = update_card_for_civitai;
+            const parrentNode = extra_network_refresh_btn.parentNode;
+            if (!parrentNode) {
+                console.error("can not find parrentNode for extra_network_refresh_btn");
+                return;
+            }
+            parrentNode.appendChild(ch_refresh);
+        }
+        //run it once
+        update_card_for_civitai();
+    }
+});
+
+})();
+
+/******/ })()
+;
+//# sourceMappingURL=civitai_helper.js.map

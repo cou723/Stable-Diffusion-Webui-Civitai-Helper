@@ -1,4 +1,3 @@
-"use strict";
 export function getActiveTabType() {
     const currentTab = get_uiCurrentTabContent();
     switch (currentTab.id) {

@@ -1,4 +1,3 @@
-"use strict";
 //convert model type between js style and python style
 export function convertModelTypeFromPyToJS(model_type: any) {
     let js_model_type = "";
