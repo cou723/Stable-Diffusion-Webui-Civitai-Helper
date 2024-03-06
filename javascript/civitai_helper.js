@@ -1168,7 +1168,7 @@ onUiLoaded(() => {
 
             //get toolbar
             //get Refresh button
-            extra_network_refresh_btn = gradioApp().getElementById("txt2img_lora_controls");
+            extra_network_refresh_btn = gradioApp().getElementById("txt2img_lora_extra_refresh");
             console.log("get extra_network_refresh_btn: " + extra_network_refresh_btn);
 
 
