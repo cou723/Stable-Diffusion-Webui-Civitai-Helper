@@ -1,6 +1,7 @@
-"use strict";
+import { send_ch_py_msg } from "./send_ch_py_msg";
+
 // download model's new version into SD at python side
-function ch_dl_model_new_version(
+export function ch_dl_model_new_version(
     event: any,
     model_path: any,
     version_id: any,
@@ -16,9 +17,9 @@ function ch_dl_model_new_version(
     }
 
     //get hidden components of extension
-    let js_dl_model_new_version_btn = globalThis
-        .gradioApp()
-        .getElementById("ch_js_dl_model_new_version_btn");
+    let js_dl_model_new_version_btn = gradioApp().getElementById(
+        "ch_js_dl_model_new_version_btn"
+    );
     if (!js_dl_model_new_version_btn) {
         return;
     }

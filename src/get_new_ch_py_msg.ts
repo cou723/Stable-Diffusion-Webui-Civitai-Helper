@@ -1,7 +1,7 @@
 "use strict";
 // get msg from python side from a hidden textbox
 // it will try once in every sencond, until it reach the max try times
-const get_new_ch_py_msg = (max_count = 5) =>
+export const get_new_ch_py_msg = (max_count = 5) =>
     new Promise((resolve, reject) => {
         console.log("run get_new_ch_py_msg");
 

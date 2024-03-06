@@ -1,8 +1,7 @@
-"use strict";
 // send msg to python side by filling a hidden text box
 // then will click a button to trigger an action
 // msg is an object, not a string, will be stringify in this function
-function send_ch_py_msg(msg: any) {
+export function send_ch_py_msg(msg: any) {
     console.log("run send_ch_py_msg");
     console.log("msg: " + JSON.stringify(msg));
 

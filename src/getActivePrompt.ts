@@ -1,6 +1,5 @@
-"use strict";
-function getActivePrompt() {
-    const currentTab = globalThis.get_uiCurrentTabContent();
+export function getActivePrompt() {
+    const currentTab = get_uiCurrentTabContent();
     switch (currentTab.id) {
         case "tab_txt2img":
             return <HTMLInputElement>(

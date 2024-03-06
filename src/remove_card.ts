@@ -1,12 +1,20 @@
-"use strict";
+import { ch_sd_version } from "./ch_sd_version";
+import { convertModelTypeFromPyToJS } from "./convertModelTypeFromPyToJS";
+import { getActiveTabType } from "./getActiveTabType";
+import { get_new_ch_py_msg } from "./get_new_ch_py_msg";
+import { send_ch_py_msg } from "./send_ch_py_msg";
 
-async function remove_card(event: any, model_type: any, search_term: any) {
+export async function remove_card(
+    event: any,
+    model_type: any,
+    search_term: any
+) {
     console.log("start remove_card");
 
     //get hidden components of extension
-    let js_remove_card_btn = globalThis
-        .gradioApp()
-        .getElementById("ch_js_remove_card_btn");
+    let js_remove_card_btn = gradioApp().getElementById(
+        "ch_js_remove_card_btn"
+    );
     if (!js_remove_card_btn) {
         return;
     }
@@ -79,14 +87,10 @@ async function remove_card(event: any, model_type: any, search_term: any) {
 
                 refresh_btn_id =
                     active_tab + "_" + js_model_type + "_extra_refresh";
-                refresh_btn = globalThis
-                    .gradioApp()
-                    .getElementById(refresh_btn_id);
+                refresh_btn = gradioApp().getElementById(refresh_btn_id);
             } else {
                 refresh_btn_id = active_tab + "_extra_refresh";
-                refresh_btn = globalThis
-                    .gradioApp()
-                    .getElementById(refresh_btn_id);
+                refresh_btn = gradioApp().getElementById(refresh_btn_id);
             }
 
             if (refresh_btn) {

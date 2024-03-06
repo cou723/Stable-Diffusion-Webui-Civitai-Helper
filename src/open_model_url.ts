@@ -1,13 +1,16 @@
-"use strict";
-//button's click function
+import { get_new_ch_py_msg } from "./get_new_ch_py_msg";
+import { send_ch_py_msg } from "./send_ch_py_msg";
 
-async function open_model_url(event: any, model_type: any, search_term: any) {
+//button's click function
+export async function open_model_url(
+    event: any,
+    model_type: any,
+    search_term: any
+) {
     console.log("start open_model_url");
 
     //get hidden components of extension
-    let js_open_url_btn = globalThis
-        .gradioApp()
-        .getElementById("ch_js_open_url_btn");
+    let js_open_url_btn = gradioApp().getElementById("ch_js_open_url_btn");
     if (!js_open_url_btn) {
         return;
     }

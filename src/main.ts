@@ -1,6 +1,9 @@
 "use strict";
 
-globalThis.onUiLoaded(() => {
+import { ch_sd_version } from "./ch_sd_version";
+import { getActiveTabType } from "./getActiveTabType";
+
+onUiLoaded(() => {
     console.log("ui loaded");
 
     // get all extra network tabs
@@ -61,9 +64,9 @@ globalThis.onUiLoaded(() => {
 
             //find out current selected model type tab
             let active_extra_tab_type = "";
-            let extra_tabs = globalThis
-                .gradioApp()
-                .getElementById(tab_prefix + "_extra_tabs");
+            let extra_tabs = gradioApp().getElementById(
+                tab_prefix + "_extra_tabs"
+            );
             if (!extra_tabs) {
                 console.log(
                     "can not find extra_tabs: " + tab_prefix + "_extra_tabs"
@@ -73,11 +76,9 @@ globalThis.onUiLoaded(() => {
             //get active extratab
             const active_extra_tab = (
                 Array.from(
-                    globalThis
-                        .get_uiCurrentTabContent()
-                        .querySelectorAll(
-                            ".extra-network-cards,.extra-network-thumbs"
-                        )
+                    get_uiCurrentTabContent().querySelectorAll(
+                        ".extra-network-cards,.extra-network-thumbs"
+                    )
                 ).find(
                     (el: any) =>
                         el.closest(".tabitem").style.display === "block"
@@ -135,9 +136,8 @@ globalThis.onUiLoaded(() => {
                 extra_network_id =
                     tab_prefix + "_" + js_model_type + "_" + cardid_suffix;
                 // console.log("searching extra_network_node: " + extra_network_id);
-                extra_network_node = globalThis
-                    .gradioApp()
-                    .getElementById(extra_network_id);
+                extra_network_node =
+                    gradioApp().getElementById(extra_network_id);
 
                 // console.log("find extra_network_node: " + extra_network_id);
 
@@ -326,9 +326,7 @@ globalThis.onUiLoaded(() => {
 
             //find out current selected model type tab
 
-            extra_tabs = globalThis
-                .gradioApp()
-                .getElementById(tab_prefix + "_extra_tabs");
+            extra_tabs = gradioApp().getElementById(tab_prefix + "_extra_tabs");
             if (!extra_tabs) {
                 console.log(
                     "can not find extra_tabs: " + tab_prefix + "_extra_tabs"
@@ -338,9 +336,9 @@ globalThis.onUiLoaded(() => {
             //get tab by id
             for (const js_model_type of model_type_list) {
                 //get tab
-                let extra_tab = globalThis
-                    .gradioApp()
-                    .getElementById(tab_prefix + "_" + js_model_type);
+                let extra_tab = gradioApp().getElementById(
+                    tab_prefix + "_" + js_model_type
+                );
                 if (extra_tab == null) {
                     console.log(
                         `can not get extra_tab: ${tab_prefix}_${js_model_type}`
@@ -555,16 +553,12 @@ globalThis.onUiLoaded(() => {
                 toolbar_id = prefix + "_" + js_model_type + "_controls";
 
                 //get toolbar
-                extra_toolbar = globalThis
-                    .gradioApp()
-                    .getElementById(toolbar_id);
+                extra_toolbar = gradioApp().getElementById(toolbar_id);
 
                 //get official refresh button
                 refresh_btn_id =
                     prefix + "_" + js_model_type + "_extra_refresh";
-                refresh_btn = globalThis
-                    .gradioApp()
-                    .getElementById(refresh_btn_id);
+                refresh_btn = gradioApp().getElementById(refresh_btn_id);
                 if (!refresh_btn) {
                     console.log(
                         "can not find refresh_btn with id: " + refresh_btn_id
@@ -576,7 +570,7 @@ globalThis.onUiLoaded(() => {
                 refresh_btn.onclick = function (event) {
                     console.log("run refresh button on click");
                     //official's refresh function
-                    globalThis.extraNetworksControlRefreshOnClick(
+                    extraNetworksControlRefreshOnClick(
                         event,
                         prefix,
                         js_model_type
@@ -592,13 +586,13 @@ globalThis.onUiLoaded(() => {
     } else {
         for (let prefix of tab_prefix_list) {
             tab_id = prefix + "_extra_tabs";
-            extra_tab = globalThis.gradioApp().getElementById(tab_id);
+            extra_tab = gradioApp().getElementById(tab_id);
 
             //get toolbar
             //get Refresh button
-            extra_network_refresh_btn = globalThis
-                .gradioApp()
-                .getElementById("txt2img_lora_extra_refresh");
+            extra_network_refresh_btn = gradioApp().getElementById(
+                "txt2img_lora_extra_refresh"
+            );
             console.log(
                 "get extra_network_refresh_btn: " + extra_network_refresh_btn
             );

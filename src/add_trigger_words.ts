@@ -1,11 +1,17 @@
-"use strict";
-function add_trigger_words(event: any, model_type: any, search_term: any) {
+import { getActivePrompt } from "./getActivePrompt";
+import { send_ch_py_msg } from "./send_ch_py_msg";
+
+export function add_trigger_words(
+    event: any,
+    model_type: any,
+    search_term: any
+) {
     console.log("start add_trigger_words");
 
     //get hidden components of extension
-    let js_add_trigger_words_btn = globalThis
-        .gradioApp()
-        .getElementById("ch_js_add_trigger_words_btn");
+    let js_add_trigger_words_btn = gradioApp().getElementById(
+        "ch_js_add_trigger_words_btn"
+    );
     if (!js_add_trigger_words_btn) {
         return;
     }

@@ -16,7 +16,7 @@ module.exports = {
         ],
     },
     resolve: {
-        extensions: [".tsx", ".ts", ".js"],
+        extensions: [".ts", ".js"],
     },
     output: {
         filename: "civitai_helper.js", // 出力ファイル名

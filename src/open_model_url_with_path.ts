@@ -1,7 +1,9 @@
-"use strict";
 //button's click function with model_path
 
-async function open_model_url_with_path(
+import { get_new_ch_py_msg } from "./get_new_ch_py_msg";
+import { send_ch_py_msg } from "./send_ch_py_msg";
+
+export async function open_model_url_with_path(
     event: any,
     model_type: any,
     model_path: any
@@ -9,9 +11,7 @@ async function open_model_url_with_path(
     console.log("start open_model_url");
 
     //get hidden components of extension
-    let js_open_url_btn = globalThis
-        .gradioApp()
-        .getElementById("ch_js_open_url_btn");
+    let js_open_url_btn = gradioApp().getElementById("ch_js_open_url_btn");
     if (!js_open_url_btn) {
         return;
     }

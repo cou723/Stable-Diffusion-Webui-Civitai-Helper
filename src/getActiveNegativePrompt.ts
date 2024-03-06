@@ -1,5 +1,5 @@
 "use strict";
-function getActiveNegativePrompt() {
+export function getActiveNegativePrompt() {
     const currentTab = get_uiCurrentTabContent();
     switch (currentTab.id) {
         case "tab_txt2img":

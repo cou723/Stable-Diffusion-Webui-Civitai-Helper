@@ -1,6 +1,6 @@
 "use strict";
-function getActiveTabType() {
-    const currentTab = globalThis.get_uiCurrentTabContent();
+export function getActiveTabType() {
+    const currentTab = get_uiCurrentTabContent();
     switch (currentTab.id) {
         case "tab_txt2img":
             return "txt2img";

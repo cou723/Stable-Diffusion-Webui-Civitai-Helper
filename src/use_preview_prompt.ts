@@ -1,11 +1,18 @@
-"use strict";
-function use_preview_prompt(event: any, model_type: any, search_term: any) {
+import { getActiveNegativePrompt } from "./getActiveNegativePrompt";
+import { getActivePrompt } from "./getActivePrompt";
+import { send_ch_py_msg } from "./send_ch_py_msg";
+
+export function use_preview_prompt(
+    event: any,
+    model_type: any,
+    search_term: any
+) {
     console.log("start use_preview_prompt");
 
     //get hidden components of extension
-    let js_use_preview_prompt_btn = globalThis
-        .gradioApp()
-        .getElementById("ch_js_use_preview_prompt_btn");
+    let js_use_preview_prompt_btn = gradioApp().getElementById(
+        "ch_js_use_preview_prompt_btn"
+    );
     if (!js_use_preview_prompt_btn) {
         return;
     }

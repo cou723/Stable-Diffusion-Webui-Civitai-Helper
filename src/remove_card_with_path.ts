@@ -1,6 +1,9 @@
-"use strict";
+import { convertModelTypeFromPyToJS } from "./convertModelTypeFromPyToJS";
+import { getActiveTabType } from "./getActiveTabType";
+import { get_new_ch_py_msg } from "./get_new_ch_py_msg";
+import { send_ch_py_msg } from "./send_ch_py_msg";
 
-async function remove_card_with_path(
+export async function remove_card_with_path(
     event: any,
     model_type: any,
     model_path: any
@@ -8,9 +11,9 @@ async function remove_card_with_path(
     console.log("start remove_card");
 
     //get hidden components of extension
-    let js_remove_card_btn = globalThis
-        .gradioApp()
-        .getElementById("ch_js_remove_card_btn");
+    let js_remove_card_btn = gradioApp().getElementById(
+        "ch_js_remove_card_btn"
+    );
     if (!js_remove_card_btn) {
         return;
     }
@@ -76,9 +79,7 @@ async function remove_card_with_path(
 
             let refresh_btn_id =
                 active_tab + "_" + js_model_type + "_extra_refresh";
-            let refresh_btn = globalThis
-                .gradioApp()
-                .getElementById(refresh_btn_id);
+            let refresh_btn = gradioApp().getElementById(refresh_btn_id);
             if (refresh_btn) {
                 console.log("click button: " + refresh_btn_id);
                 refresh_btn.click();
